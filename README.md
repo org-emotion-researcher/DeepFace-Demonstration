@@ -57,7 +57,7 @@ Furthermore the following has been included:
 ## Prerequisites
 
 1. **Windows Operating System**:
-   - The script is designed to work for Windows. However, it was adjusted to also work for the current MacOS distribution Sequoia.
+   - The script is designed to work on Windows 11.
 
 2. **Anaconda 3**:
    - It is highly recommended to install [Anaconda 3](https://www.anaconda.com/products/distribution).
