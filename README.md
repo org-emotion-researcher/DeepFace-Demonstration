@@ -72,7 +72,7 @@ Furthermore the following has been included:
 
 5. **Microsoft Visual C++ Redistributable**:
    - Required for FFmpeg to work properly. FFmpeg is used to create the animation of the visualised analysis.
-   - Download the latest version from [here](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170&spm=a2ty_o01.29997173.0.0.335ec921D777oq)
+   - Download the latest version from [here](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170&spm=a2ty_o01.29997173.0.0.335ec921D777oq).
 	- Properly check which architecture your system has and install the right version: (ARM64, X86, X64).
 
 
