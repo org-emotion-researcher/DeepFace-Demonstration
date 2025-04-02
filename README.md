@@ -65,7 +65,7 @@ Furthermore the following has been included:
 
 3. **Internet Connection**:
    - The initial installation of the project requires a stable internet connection to download the relevant scripts. 
-   - Furthermore the project automatically downloads required ressources (e.g., Python libraries or model weights) if they are not found on your system which also require an internet connection.
+   - Furthermore the project automatically downloads required resources (e.g., Python libraries or model weights) if they are not found on your system which also require an internet connection.
 
 4. **Storage Space**:
    - Requires approximately 2–5 GB of free storage, depending on input video size and output files.
