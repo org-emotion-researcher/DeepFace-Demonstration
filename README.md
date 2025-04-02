@@ -1,11 +1,11 @@
 # Demonstration of Algorithmic Facial Expression Analysis with DeepFace
 
-This project uses **DeepFace**, an open-source facial attribute analysis library, to analyze emotions in videos and generate a detailed emotional analysis both as a table and visually as a plot and an animated plot with a timeline in accordance to the input video.
+This project uses **DeepFace**, an open-source facial attribute analysis library, to analyse emotions in videos and generate a detailed emotional analysis both as a table and visually as a plot and an animated plot with a timeline in accordance to the input video.
 
 
 ## About DeepFace
 
-**DeepFace** is a versatile open-source library for facial attribute analysis and face recognition. It provides tools to detect faces, analyze emotions, and extract other facial attributes. For more information, visit the official repository: [DeepFace GitHub](https://github.com/serengil/deepface).
+**DeepFace** is a versatile open-source library for facial attribute analysis and face recognition. It provides tools to detect faces, analyse emotions, and extract other facial attributes. For more information, visit the official repository: [DeepFace GitHub](https://github.com/serengil/deepface).
 
 ### Important Notes:
 The **Facial Action Coding System (FACS)** defines six basic emotions: joy, sadness, anger, surprise, fear, and disgust. **DeepFace** is configured to detect the following six emotions:
@@ -16,17 +16,17 @@ The **Facial Action Coding System (FACS)** defines six basic emotions: joy, sadn
 - Disgusted
 - Fearful
 
-In addition, **DeepFace** also detects "neutral" emotions. Additionally, in the final visualizations of the example videos, not all emotions may appear. This is because:
+In addition, **DeepFace** also detects "neutral" emotions. Additionally, in the final visualisations of the example videos, not all emotions may appear. This is because:
 1. Some emotions may not be expressed in the video.
 2. The default threshold of 80% excludes low-confidence emotions to reduce clutter
 
 
 ## Overview
 
-This project analyzes emotions in any videos using **DeepFace** and generates three types of outputs:
+This project analyses emotions in any videos using **DeepFace** and generates three types of outputs:
 - **Detailed CSV/Excel analysis reports**: Comprehensive data files containing emotion scores for each frame.
 - **Static emotion distribution plots**: Visual representations of overall emotional trends.
-- **Animated timeline visualizations**: Dynamic timelines showing how emotions evolve throughout the video.
+- **Animated timeline visualisations**: Dynamic timelines showing how emotions evolve throughout the video.
 
 Furthermore the following has been included:
 - **Visualised Example Analysis**: You can download this recommended depiction of the analysis of our exemplary videos under [this link](https://drive.proton.me/urls/2GPMK16D38#jHc1r4JrN2N7). This has been manually edited with a movie editing tool to show the visualisation created within this project in combination with the videos in parallel.
@@ -36,14 +36,14 @@ Furthermore the following has been included:
 - **Parallel Processing**: Utilizes multiple CPU cores to speed up analysis.
 - **Configurable Confidence Thresholds**: Allows users to adjust the minimum confidence level for emotion detection.
 - **Support for Multiple Video Formats**: Works with `.mp4`, `.avi`, `.mov`, and `.mkv` files.
-- **Combined Analysis Reports**: Generates aggregated CSV and Excel files when analyzing multiple videos.
+- **Combined Analysis Reports**: Generates aggregated CSV and Excel files when analysing multiple videos.
 
 
 ### Contents
 
 - **videos_to_analyse**: A folder containing various video files used in the example analysis.
 - **.gitattributes**: A Git LFS configuration file specifying which file types to track as large files (not relevant for running the analysis).
-- **analysis.py**: Script for analyzing the emotions of the subject within the videos_to_analyse folder.
+- **analysis.py**: Script for analysing the emotions of the subject within the videos_to_analyse folder.
 - **config.py**: Configuration settings (e.g., paths, environment variables) used throughout the project.
 - **ffmpeg_installer.py**: A helper script to install or manage FFmpeg, a tool for handling multimedia files.
 - **install_dependencies.py**: A script to install Python dependencies or other required packages for the project.
@@ -89,7 +89,7 @@ Furthermore the following has been included:
 
 #### 2.1 Download the Project Folder including exemplary videos through Git
 - This might take some time and requires a stable internet connection
-- Either now or after initialising Git LSF it is recommended to navigate to a directory where the new folder should be created. For example:
+- Either now or after initialising Git LFS it is recommended to navigate to a directory where the new folder should be created. For example:
   ```bash
   cd C:\Users\your_username\Documents
   ```
@@ -97,11 +97,11 @@ Furthermore the following has been included:
   ```bash
   conda install git
   ```
-- Install Git LSF
+- Install Git LFS
   ```bash
   conda install -c conda-forge git-lfs
   ```
-- Initialise Git LSF
+- Initialise Git LFS
   ```bash
   git lfs install
   ```
@@ -140,7 +140,7 @@ Furthermore the following has been included:
 
 ### Run the Analysis
 - Place your video files (supported formats: `.mp4`, `.avi`, `.mov`, `.mkv`) into the `videos_to_analyse` folder.
-- Use the following command to analyze every `n`-th frame:
+- Use the following command to analyse every `n`-th frame:
   ```bash
   python main.py analysis --frame_step n
   ```
@@ -148,27 +148,27 @@ Furthermore the following has been included:
     ```bash
     python main.py analysis --frame_step 1000
     ```
-    This analyzes every 1000th frame of each video.
+    This analyses every 1000th frame of each video.
 
 - **Tips for Preliminary Testing**:
   - Start with a high `frame_step` value (e.g., 1000) to estimate processing time.
   - Videos typically have 30 frames per second. Multiply the video length (in seconds) by 30 to determine the total number of frames. Then you can estimate the time differences. 
   - Generally, due to large setup times, the increases in time are not linear. An increase from only analysing every 1000th frame vs only every frame was approximately 100 times longer.
 
-- To analyze every frame, run:
+- To analyse every frame, run:
   ```bash
   python main.py analysis
   ```
-- This has been done for the visualised_example_analysis to have the most fine-grained analysis possible where the emotion of every single frame of the videos in the videos_to_analyse folder are analysed.
+- This has been done for the visualised_example_analysis.mp4 to have the most fine-grained analysis possible where the emotion of every single frame of the videos in the videos_to_analyse folder are analysed.
 
 #### Output of the Analysis:
 - One **CSV file** per video containing the analysis results.
 - One **Excel file** per video containing the same data.
-- A **combined CSV/Excel file** aggregating results from all analyzed videos.
+- A **combined CSV/Excel file** aggregating results from all analysed videos.
 
 
-### Run the Visualization
-- After completing the analysis, generate visualizations using:
+### Run the Visualisation
+- After completing the analysis, generate visualisations using:
   ```bash
   python main.py visualisation
   ```
@@ -181,13 +181,13 @@ Furthermore the following has been included:
 	python main.py visualisation --sheet "sheet name.csv"
 	```
 
-#### Output of the Visualization:
+#### Output of the Visualisation:
 - A **static plot** showing emotions that surpass the confidence threshold.
 - An **animated plot** displaying a timeline to better see which emotion is expressed at which point in time.
 
 
 ### Additional Commands
-- To perform both analysis and visualization in one step, run:
+- To perform both analysis and visualisation in one step, run:
   ```bash
   python main.py
   ```
@@ -199,21 +199,21 @@ Most customizations can be done within the `config.py` file. The following are t
 
 #### Thresholds
 - **`FACE_CONFIDENCE_THRESHOLD` (Default = 0.9)**:
-  - This variable sets the confidence threshold for face detection as a **decimal**.
+  - This variable sets the confidence threshold for face detection as a **decimal value between 0 and 1**.
   - A higher value ensures only highly confident face detections are processed.
   - Adjust this if you encounter issues with false positives or missed detections.
 
 - **`EMOTION_SCORE_THRESHOLD` (Default = 50)**:
-  - This variable determines the threshold for determining when an emotion should be classified as dominant in **percent**.
-  - DeepFace provides a confidence level for each and every analysed emotion which reflects how confident DeepFace is in its analysis.
+  - This variable determines the threshold for determining when an emotion should be classified as dominant.
+  - Value represents **percentage points (0-100)** of confidence in the emotion detection.
   - Emotions that score below this threshold will not be considered dominant.
   - Increase this value to adjust the logic when an emotion is deemed as dominant.
 
 - **`CONFIDENCE_THRESHOLD` (Default = 80)**:
-  - This variable defines the minimum confidence level for emotions to be included in the visualization in **percent**.
-  - DeepFace provides a confidence level for each and every analysed emotion which reflects how confident DeepFace is in its analysis.
-  - Emotions who are rated below this set threshold will not appear in the plots or animations.
-  - The default value of 80% helps reduce clutter in the visualizations by excluding low-confidence emotions. Adjust this based on your analysis requirements or preferences.
+  - This variable defines the minimum confidence level for emotions to be included in the visualization.
+  - Value represents **percentage points (0-100)** of confidence in the emotion detection.
+  - Emotions rated below this threshold will not appear in the plots or animations.
+  - The default value of 80 helps reduce clutter in the visualizations by excluding low-confidence emotions.
 
 #### Plot Dimensions
 - **`PLOT_WIDTH` (Default = 19.2)**:
@@ -241,10 +241,10 @@ Most customizations can be done within the `config.py` file. The following are t
 ## Specifications
 
 - **Analysis Time**: 
-  - Three 4.5-minute videos took ~29 minutes to analyze.
+  - Three 4.5-minute videos took ~29 minutes to analyse.
   - Each video took ~8–10 minutes to process.
 
-- **Visualization Time**:
+- **Visualisation Time**:
   - Visualizing each dataset took ~16 minutes.
   - Each sheet took ~5–6 minutes to process.
 
@@ -282,14 +282,14 @@ This section describes the processes displayed in the Anaconda Prompt or termina
 2. It will then specify which video file processing will begin with.
 3. Information about reading the video file will be displayed.
 4. The number of detected frames will be stated. This should match the video's duration (in seconds) multiplied by its frame rate (typically 30 FPS).
-5. DeepFace will process individual frames, notifying you every time 10% of the video file has been analyzed.
-6. At the end of each video, a brief recap of the analyzed emotions will be provided.
+5. DeepFace will process individual frames, notifying you every time 10% of the video file has been analysed.
+6. At the end of each video, a brief recap of the analysed emotions will be provided.
 7. If multiple videos are present, steps 2–6 will repeat until all videos are processed.
 
-#### **Visualization Phase**
-8. After completing the analysis, the visualization process begins.
+#### **Visualisation Phase**
+8. After completing the analysis, the visualisation process begins.
 9. A static plot summarizing the emotions that surpass the confidence threshold is created.
-10. The visualization continues by dividing the frames into segments (default: twice the number of CPU processes).
+10. The visualisation continues by dividing the frames into segments (default: twice the number of CPU processes).
 11. The framework for the animation is initialized, and progress updates are displayed every 10%. Only the most recent segment's progress is shown.
 12. Once a segment is complete, a message confirms it has been saved.
 13. After all segments are saved, they are automatically combined into a single video file.
@@ -298,4 +298,4 @@ This section describes the processes displayed in the Anaconda Prompt or termina
 
 #### **Execution Options**
 - If you run only the analysis (`python main.py analysis`), the process stops after step 7.
-- If you run only the visualization (`python main.py visualisation --sheet sheet_name`), the process starts at step 9 and ends at step 15.
+- If you run only the visualisation (`python main.py visualisation --sheet sheet_name`), the process starts at step 9 and ends at step 15.
