@@ -1,14 +1,13 @@
 # Demonstration of Algorithmic Facial Expression Analysis with DeepFace
 
-This project uses **DeepFace**, an open-source facial attribute analysis library, to analyse emotions in videos and generate a detailed emotional analysis both as a table and visually as a plot and an animated plot with a timeline in accordance to the input video.
-
+Our repository extends but also streamlines the original **DeepFace** package to better meet the needs of organizational researchers working with temporally sensitive video data. Specifically, we introduce support for frame-level synchronization, provide a simplified process designed for multi-video analysis, and include detailed illustrations and include detailed illustrations and annotated scripts that guide users through the full analysis process.
 
 ## About DeepFace
 
 **DeepFace** is a versatile open-source library for facial attribute analysis and face recognition. It provides tools to detect faces, analyse emotions, and extract other facial attributes. For more information, visit the official repository: [DeepFace GitHub](https://github.com/serengil/deepface).
 
 ### Important Notes:
-The **Facial Action Coding System (FACS)** defines six basic emotions: joy, sadness, anger, surprise, fear, and disgust. **DeepFace** is configured to detect the following six emotions:
+**DeepFace** builds on the **Facial Action Coding System (FACS)** which defines six basic emotions: joy, sadness, anger, surprise, fear, and disgust. **DeepFace** is configured to detect the following six emotions:
 - Happy
 - Sad
 - Angry
@@ -16,17 +15,17 @@ The **Facial Action Coding System (FACS)** defines six basic emotions: joy, sadn
 - Disgusted
 - Fearful
 
-In addition, **DeepFace** also detects "neutral" emotions. Additionally, in the final visualisations of the example videos, not all emotions may appear. This is because:
+In addition, **DeepFace** also detects "neutral" emotions. 
+In the final visualisations of the example videos, not all emotions may appear. This is because:
 1. Some emotions may not be expressed in the video.
-2. The default threshold of 80% excludes low-confidence emotions to reduce clutter
-
+2. The default threshold of 80% excludes low-confidence emotions to reduce clutter.
 
 ## Overview
 
 This project analyses emotions in any videos using **DeepFace** and generates three types of outputs:
 - **Detailed CSV/Excel analysis reports**: Comprehensive data files containing emotion scores for each frame.
-- **Static emotion distribution plots**: Visual representations of overall emotional trends.
-- **Animated timeline visualisations**: Dynamic timelines showing how emotions evolve throughout the video.
+- **Emotion distribution plots**: Visual representation of emotions surpassing a defined treshold in each frame across the entire video length.
+- **Animated timeline visualisations**: Dynamic timeline showing how emotions evolve throughout the analysed video.
 
 Furthermore the following has been included:
 - **Visualised Example Analysis**: You can download this recommended depiction of the analysis of our exemplary videos under [this link](https://drive.proton.me/urls/2GPMK16D38#jHc1r4JrN2N7). This has been manually edited with a movie editing tool to show the visualisation created within this project in combination with the videos in parallel.
@@ -37,7 +36,6 @@ Furthermore the following has been included:
 - **Configurable Confidence Thresholds**: Allows users to adjust the minimum confidence level for emotion detection.
 - **Support for Multiple Video Formats**: Works with `.mp4`, `.avi`, `.mov`, and `.mkv` files.
 - **Combined Analysis Reports**: Generates aggregated CSV and Excel files when analysing multiple videos.
-
 
 ### Contents
 
@@ -65,7 +63,7 @@ Furthermore the following has been included:
 
 3. **Internet Connection**:
    - The initial installation of the project requires a stable internet connection to download the relevant scripts. 
-   - Furthermore the project automatically downloads required resources (e.g., Python libraries or model weights) if they are not found on your system which also require an internet connection.
+   - Furthermore the project automatically downloads required resources (e.g., Python libraries or model weights) if they are not found on your system, which also requires a stable internet connection.
 
 4. **Storage Space**:
    - Requires approximately 2–5 GB of free storage, depending on input video size and output files.
@@ -153,7 +151,7 @@ Furthermore the following has been included:
 - **Tips for Preliminary Testing**:
   - Start with a high `frame_step` value (e.g., 1000) to estimate processing time.
   - Videos typically have 30 frames per second. Multiply the video length (in seconds) by 30 to determine the total number of frames. Then you can estimate the time differences. 
-  - Generally, due to large setup times, the increases in time are not linear. An increase from only analysing every 1000th frame vs only every frame was approximately 100 times longer.
+  - Generally, due to long setup times, the increases in time are not linear. An increase from analysing every 1000th frame vs every frame was approximately 100 times longer.
 
 - To analyse every frame, run:
   ```bash
@@ -182,8 +180,8 @@ Furthermore the following has been included:
 	```
 
 #### Output of the Visualisation:
-- A **static plot** showing emotions that surpass the confidence threshold.
-- An **animated plot** displaying a timeline to better see which emotion is expressed at which point in time.
+- **Emotion distribution plot**: Visual representation of emotions surpassing a defined treshold in each frame across the entire video length.
+- **Animated timeline visualisation**: Dynamic timeline showing how emotions evolve throughout the analysed video.
 
 
 ### Additional Commands
