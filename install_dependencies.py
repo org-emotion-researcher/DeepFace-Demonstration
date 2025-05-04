@@ -4,7 +4,6 @@ import importlib.util
 import subprocess
 import warnings
 import multiprocessing as mp
-from ffmpeg_installer import ensure_ffmpeg
 
 # Suppress Python deprecation warnings.
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -39,8 +38,6 @@ def install_dependencies(requirements_path):
                 subprocess.check_call([sys.executable, "-m", "pip", "install", package])
             else:
                 print(f"Package '{package}' is already installed.")
-        # Ensure FFmpeg is installed.
-        ensure_ffmpeg()
     except FileNotFoundError:
         print(f"Error: '{requirements_path}' not found.")
         sys.exit(1)

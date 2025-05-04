@@ -14,6 +14,7 @@ from datetime import datetime
 import warnings
 import config
 import logging
+from ffmpeg_installer import ensure_ffmpeg
 
 # Suppress Python deprecation warnings.
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -46,23 +47,33 @@ logging.basicConfig(
     ]
 )
 
+# Ensure FFmpeg is available for the visualisation
+try:
+    logging.info("Ensuring FFmpeg is available for the visualisation process...")
+    ensure_ffmpeg()
+    logging.info("FFmpeg check/setup complete.")
+except Exception as e:
+    logging.error(f"Failed during ensure_ffmpeg call: {e}")
+    # Decide if you want to exit if FFmpeg setup fails
+    # sys.exit("Could not ensure FFmpeg is available.")
+
 # Emotion color mapping and renaming.
 emotions_colors = {
     'happy':     'orange',
     'sad':       'blue',
     'angry':     'red',
-    'surprised': 'yellow',
-    'disgusted': 'darkgreen',
-    'fearful':   'black',
+    'surprise': 'yellow',
+    'disgust': 'darkgreen',
+    'fear':   'black',
     'neutral':   'gray'
 }
 emotion_rename_map = {
     'happy':     'joy',
     'sad':       'sadness',
     'angry':     'anger',
-    'surprised': 'surprise',
-    'disgusted': 'disgust',
-    'fearful':   'fear',
+    'surprise': 'surprise',
+    'disgust': 'disgust',
+    'fear':   'fear',
     'neutral':   'neutrality'
 }
 
