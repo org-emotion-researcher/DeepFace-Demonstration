@@ -97,7 +97,9 @@ def get_dominant_emotion(emo):
     if not emo:
         return 'no emotion detected'
     dominant = max(emo, key=emo.get)
-    return dominant if emo[dominant] >= config.EMOTION_SCORE_THRESHOLD else 'no dominant emotion detected'
+    dominant = max(emo, key=emo.get)
+    threshold = config.EMOTION_SCORE_THRESHOLD if config.EMOTION_SCORE_THRESHOLD is not None else 50
+    return dominant if emo[dominant] >= threshold else 'no dominant emotion detected'
 
 
 

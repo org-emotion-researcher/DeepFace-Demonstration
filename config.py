@@ -13,16 +13,16 @@ LOG_DIR = "logs"                        # Folder where the log files are saved.
 
 # Thresholds
 FACE_CONFIDENCE_THRESHOLD = 0.9     # Confidence threshold for face detection.
-EMOTION_SCORE_THRESHOLD = 50        # Threshold for dominant emotion detection.
-CONFIDENCE_THRESHOLD = 80           # Confidence threshold for emotion visualisation.
-EMOTION_MODEL = "Facenet"          # Defines which emotion model is being utilized: OpenFace, Facenet, VGG-Face, 
+EMOTION_SCORE_THRESHOLD = 50        # Threshold for when a emotion is deemed as dominant.
+CONFIDENCE_THRESHOLD = 80           # Confidence threshold for emotion detection.
+EMOTION_MODEL = "Facenet"          # Defines which facial recognition model is being utilized: OpenFace, Facenet, VGG-Face, 
                                     # DeepID, ArcFace, GhostFaceNet have all been tested and are working 
                                     # after the download of new model weights. 
                                     # DeepFace does allow for more models but they have not been easy to implement.
 
 # Thread and Segmentation settings
 CPU_CORES = psutil.cpu_count(logical=False)  # Get number of physical CPU cores.
-POOL_SIZE = (CPU_CORES) // 2           # We set the pool size to two-thirds the number of CPU cores.
+POOL_SIZE = (CPU_CORES) // 3           # We set the pool size to two-thirds the number of CPU cores.
 NUM_SEGMENTS = POOL_SIZE * 2                # Number of segments to divide the video into for parallel processing. 
                                             # This will alleviate the load on the CPU and especially the RAM.
 

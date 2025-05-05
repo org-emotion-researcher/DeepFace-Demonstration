@@ -42,20 +42,20 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler(os.path.join(LOG_DIR, "visualisation.log")),  # Fixed
+        logging.FileHandler(os.path.join(LOG_DIR, "visualisation.log")),
         logging.StreamHandler()
     ]
 )
 
-# Ensure FFmpeg is available for the visualisation
-try:
-    logging.info("Ensuring FFmpeg is available for the visualisation process...")
-    ensure_ffmpeg()
-    logging.info("FFmpeg check/setup complete.")
-except Exception as e:
-    logging.error(f"Failed during ensure_ffmpeg call: {e}")
-    # Decide if you want to exit if FFmpeg setup fails
-    # sys.exit("Could not ensure FFmpeg is available.")
+# Function to ensure FFmpeg is set up, called once by the main visualisation process
+def setup_ffmpeg():
+    """Checks and sets up FFmpeg if necessary."""
+    try:
+        logging.info("Ensuring FFmpeg is available for the visualisation process...")
+        ensure_ffmpeg()
+        logging.info("FFmpeg check/setup complete.")
+    except Exception as e:
+        logging.error(f"Failed during ensure_ffmpeg call: {e}")
 
 # Emotion color mapping and renaming.
 emotions_colors = {
@@ -267,12 +267,16 @@ def run_visualisation(sheet=""):
         None
         
     This function:
+    0. Ensures FFmpeg is ready (called once)
     1. Finds all CSV files with emotion analysis data
     2. Creates static plots for each file
     3. Creates segmented animations for each file using multiprocessing
     4. Concatenates segments into a final animation using FFmpeg
     5. Logs timing information throughout the process
     """
+    # Ensure FFmpeg is ready before starting any processing or pools
+    setup_ffmpeg()
+
     overall_start = time.time()
     if sheet:
         csv_files = [os.path.join(CSV_DIR, sheet)]
@@ -341,12 +345,20 @@ def run_visualisation(sheet=""):
         total_time = time.time() - start_processing
         print(f"\nAnimation for {csv_file} processed in {total_time:.1f} seconds, success {success_count}/{NUM_SEGMENTS}")
 
+        # Proceed with concatenation only if all segments were successful
+        if success_count != NUM_SEGMENTS:
+            print(f"Skipping concatenation for {csv_file} due to failed segments: {failed_segments}")
+            continue
+
         # FFmpeg concatenation
         concat_file_path = os.path.join(ANIMATIONS_DIR, f"{base_name}_concat_list.txt")
         with open(concat_file_path, "w", encoding="utf-8") as f:
             for i in range(1, NUM_SEGMENTS + 1):
                 seg_path = os.path.join(ANIMATIONS_DIR, f"segment_{i}.mp4")
-                f.write(f"file '{seg_path}'\n")
+                if os.path.exists(seg_path):
+                    f.write(f"file '{os.path.abspath(seg_path)}'\n")
+                else:
+                    print(f"Warning: Segment file {seg_path} not found for concatenation list.")
 
         final_merged_path = os.path.join(ANIMATIONS_DIR, f"{base_name}_animation.mp4")
         ffmpeg_cmd = [
@@ -365,6 +377,16 @@ def run_visualisation(sheet=""):
             print("Starting FFmpeg concatenation...")
             subprocess.run(ffmpeg_cmd, check=True)
             print(f"Final animation saved to: {final_merged_path}")
+
+            # Cleanup on Success
+            print("Cleaning up temporary files...")
+            for i in range(1, NUM_SEGMENTS + 1):
+                seg_path = os.path.join(ANIMATIONS_DIR, f"segment_{i}.mp4")
+                if os.path.exists(seg_path):
+                    os.remove(seg_path)
+            if os.path.exists(concat_file_path):
+                os.remove(concat_file_path)
+            print("Cleanup complete.")
         except subprocess.CalledProcessError as e:
             print(f"FFmpeg error: {e}")
         except FileNotFoundError:
@@ -372,7 +394,6 @@ def run_visualisation(sheet=""):
 
         print("Animation creation complete for this file.\n")
 
-        # Stop the global timer for the visualization process
     overall_end = time.time()
     overall_duration = overall_end - overall_start
     print(
