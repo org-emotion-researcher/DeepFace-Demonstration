@@ -12,9 +12,9 @@ ANIMATIONS_DIR = "animations"           # Folder where the animation files and s
 LOG_DIR = "logs"                        # Folder where the log files are saved.
 
 # Thresholds
-FACE_CONFIDENCE_THRESHOLD = 0.8     # Confidence threshold for face detection.
+FACE_CONFIDENCE_THRESHOLD = 0.9     # Confidence threshold for face detection.
 EMOTION_SCORE_THRESHOLD = 50        # Threshold for dominant emotion detection.
-CONFIDENCE_THRESHOLD = 90           # Confidence threshold for emotion detection.
+CONFIDENCE_THRESHOLD = 80           # Confidence threshold for emotion visualisation.
 EMOTION_MODEL = "Facenet"          # Defines which emotion model is being utilized: OpenFace, Facenet, VGG-Face, 
                                     # DeepID, ArcFace, GhostFaceNet have all been tested and are working 
                                     # after the download of new model weights. 
