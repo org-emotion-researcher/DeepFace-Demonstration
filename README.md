@@ -2,6 +2,7 @@
 
 Our repository extends but also streamlines the original **DeepFace** package to better meet the needs of organizational researchers working with temporally sensitive video data. Specifically, we introduce support for frame-level synchronization, provide a simplified process designed for multi-video analysis, and include detailed illustrations and include detailed illustrations and annotated scripts that guide users through the full analysis process.
 
+
 ## About DeepFace
 
 **DeepFace** is a versatile open-source library for facial attribute analysis and face recognition. It provides tools to detect faces, analyse emotions, and extract other facial attributes. For more information, visit the official repository: [DeepFace GitHub](https://github.com/serengil/deepface).
@@ -20,15 +21,13 @@ In the final visualisations of the example videos, not all emotions may appear. 
 1. Some emotions may not be expressed in the video.
 2. The default threshold of 80% excludes low-confidence emotions to reduce clutter.
 
+
 ## Overview
 
 This project analyses emotions in any videos using **DeepFace** and generates three types of outputs:
 - **Detailed CSV/Excel analysis reports**: Comprehensive data files containing emotion scores for each frame.
 - **Emotion distribution plots**: Visual representation of emotions surpassing a defined treshold in each frame across the entire video length.
 - **Animated timeline visualisations**: Dynamic timeline showing how emotions evolve throughout the analysed video.
-
-Furthermore the following has been included:
-- **Visualised Example Analysis**: You can download this recommended depiction of the analysis of our exemplary videos under [this link](https://drive.proton.me/urls/2GPMK16D38#jHc1r4JrN2N7). This has been manually edited with a movie editing tool to show the visualisation created within this project in combination with the videos in parallel.
 
 ### Key Features
 
@@ -38,10 +37,12 @@ Furthermore the following has been included:
 - **Combined Analysis Reports**: Generates aggregated CSV and Excel files when analysing multiple videos.
 
 ### Contents
-
-- **videos_to_analyse**: A folder containing various video files used in the example analysis.
+- **animations**: A folder containing the animations of the plots created after the successful running of the visualisation script.
+- **plots**: A folder containing the plots of the emotion data from the output files created after the successful running of the visualisation script.
+- **raw data output files**: A folder containing the output files in both .csv and .xlsx format of the measured emotions. 
+- **videos for AFEA demonstration**: A folder containing the video files that should be used in the example analysis.
 - **.gitattributes**: A Git LFS configuration file specifying which file types to track as large files (not relevant for running the analysis).
-- **analysis.py**: Script for analysing the emotions of the subject within the videos_to_analyse folder.
+- **analysis.py**: Script for analysing the emotions of the subject within the `videos for AFEA demonstration` folder.
 - **config.py**: Configuration settings (e.g., paths, environment variables) used throughout the project.
 - **ffmpeg_installer.py**: A helper script to install or manage FFmpeg, a tool for handling multimedia files.
 - **install_dependencies.py**: A script to install Python dependencies or other required packages for the project.
@@ -49,7 +50,6 @@ Furthermore the following has been included:
 - **README.md**: This file, providing an overview and documentation for the project.
 - **requirements.txt**: A list of Python dependencies needed to run the project.
 - **visualisation.py**: A script handle the visualisation of the analysed data.
-- **visualised_example_analysis.mp4**: A demonstration of the analysis of all exemplary videos provided in the videos_to_analyse folder.
 
 
 ## Prerequisites
@@ -115,7 +115,7 @@ Furthermore the following has been included:
 
 ### 3. Download or add Relevant Videos
 - Download the exemplary videos [here](https://drive.proton.me/urls/T51K7N36PM#6fbJSMs2yPff).
-- After downloading, navigate to the "videos_to_analyse" folder within the project and place the exemplary videos or add your own video(s).
+- After downloading, navigate to the `videos for AFEA demonstration` folder within the project and place the exemplary videos or add your own video(s).
 
 ### 4. Navigate to the Project Folder
 - Open **Anaconda Prompt** as an administrator.
@@ -137,7 +137,7 @@ Furthermore the following has been included:
 ## Conducting the Analysis
 
 ### Run the Analysis
-- Place your video files (supported formats: `.mp4`, `.avi`, `.mov`, `.mkv`) into the `videos_to_analyse` folder.
+- Place your video files (supported formats: `.mp4`, `.avi`, `.mov`, `.mkv`) into the `videos for AFEA demonstration` folder.
 - Use the following command to analyse every `n`-th frame:
   ```bash
   python main.py analysis --frame_step n
@@ -157,7 +157,7 @@ Furthermore the following has been included:
   ```bash
   python main.py analysis
   ```
-- This has been done for the visualised_example_analysis.mp4 to have the most fine-grained analysis possible where the emotion of every single frame of the videos in the videos_to_analyse folder are analysed.
+- This has been done for the visualised_example_analysis.mp4 to have the most fine-grained analysis possible where the emotion of every single frame of the videos in the `videos for AFEA demonstration` folder are analysed.
 
 #### Output of the Analysis:
 - One **CSV file** per video containing the analysis results.
