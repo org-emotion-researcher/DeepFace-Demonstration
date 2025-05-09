@@ -34,22 +34,23 @@ This project analyses emotions in any videos using **DeepFace** and generates th
 - **Parallel Processing**: Utilizes multiple CPU cores to speed up analysis.
 - **Configurable Confidence Thresholds**: Allows users to adjust the minimum confidence level for emotion detection.
 - **Support for Multiple Video Formats**: Works with `.mp4`, `.avi`, `.mov`, and `.mkv` files.
-- **Combined Analysis Reports**: Generates aggregated CSV and Excel files when analysing multiple videos.
+- **Combined Analysis Reports**: Generates aggregated CSV and Excel files (spreadsheet data) when analysing multiple videos.
 
 ### Contents
-- **animations**: A folder containing the animations of the plots created after the successful running of the visualisation script.
-- **plots**: A folder containing the plots of the emotion data from the output files created after the successful running of the visualisation script.
-- **raw data output files**: A folder containing the output files in both .csv and .xlsx format of the measured emotions. 
-- **videos for AFEA demonstration**: A folder containing the video files that should be used in the example analysis.
-- **.gitattributes**: A Git LFS configuration file specifying which file types to track as large files (not relevant for running the analysis).
-- **analysis.py**: Script for analysing the emotions of the subject within the `videos for AFEA demonstration` folder.
-- **config.py**: Configuration settings (e.g., paths, environment variables) used throughout the project.
-- **ffmpeg_installer.py**: A helper script to install or manage FFmpeg, a tool for handling multimedia files.
-- **install_dependencies.py**: A script to install Python dependencies or other required packages for the project.
-- **main.py**: The main entry point for running the core functionality of the application.
-- **README.md**: This file, providing an overview and documentation for the project.
-- **requirements.txt**: A list of Python dependencies needed to run the project.
-- **visualisation.py**: A script handle the visualisation of the analysed data.
+- **`data visualisation`**: A folder created in the main project directory where all visual outputs (static image plots and video animations) are saved. The path for this folder is set as `DATA_VISUALISATION_DIR` in the `code_scripts/config.py` file. Both plots and animations are saved directly into this folder.
+- **`raw data output files`**: A folder created in the main project directory that stores the detailed results from the emotion analysis. Its path is set as `ANALYSIS_DIR` in the `code_scripts/config.py` file. This folder contains:
+    -   **`CSV`**: A subfolder inside `raw data output files` where spreadsheet data is saved in CSV format.
+    -   **`Excel`**: A subfolder inside `raw data output files` where spreadsheet data is saved in Excel format.
+- **`videos for AFEA demonstration`**: A folder in the main project directory where you should place the video files you want to analyse. Its path is set as `INPUT_VIDEO_DIR` in the `code_scripts/config.py` file.
+- **`.gitattributes`**: A configuration file for Git (version control software). Not relevant for running the analysis.
+- **`code_scripts/analysis.py`**: The script that performs the emotion analysis on videos from the `videos for AFEA demonstration` folder.
+- **`code_scripts/config.py`**: A crucial file where you can change settings like folder paths, analysis sensitivity (thresholds), and performance options.
+- **`ffmpeg_installer.py`**: A helper script to install or manage FFmpeg, a necessary tool for creating the animated video visualisations.
+- **`install_dependencies.py`**: A script to automatically install all the software packages your computer needs to run this project. It uses the list in `code_scripts/requirements.txt`.
+- **`main.py`**: The main script you will run to start the analysis or visualisation.
+- **`README.md`**: This file, providing an overview and instructions for the project.
+- **`code_scripts/requirements.txt`**: A list of Python software packages required for the project.
+- **`code_scripts/visualisation.py`**: The script that creates image plots and video animations from the analysis data found in the `raw data output files/CSV` folder. These visualisations are saved into the `data visualisation` folder.
 
 
 ## Prerequisites
@@ -112,6 +113,7 @@ This project analyses emotions in any videos using **DeepFace** and generates th
   cd DeepFace-Demonstration
   git lfs pull
   ```
+- If this process was successful, you can skip step 3.
 
 ### 3. Download or add Relevant Videos
 - Download the exemplary videos [here](https://drive.proton.me/urls/T51K7N36PM#6fbJSMs2yPff).
@@ -133,11 +135,10 @@ This project analyses emotions in any videos using **DeepFace** and generates th
 - This ensures all necessary libraries, including FFmpeg, are installed properly.
 
 
-
 ## Conducting the Analysis
 
 ### Run the Analysis
-- Place your video files (supported formats: `.mp4`, `.avi`, `.mov`, `.mkv`) into the `videos for AFEA demonstration` folder.
+- Place your video files (supported formats: `.mp4`, `.avi`, `.mov`, `.mkv`) into the `videos for AFEA demonstration` folder at the project root.
 - Use the following command to analyse every `n`-th frame:
   ```bash
   python main.py analysis --frame_step n
@@ -157,12 +158,12 @@ This project analyses emotions in any videos using **DeepFace** and generates th
   ```bash
   python main.py analysis
   ```
-- This has been done for the visualised_example_analysis.mp4 to have the most fine-grained analysis possible where the emotion of every single frame of the videos in the `videos for AFEA demonstration` folder are analysed.
+
 
 #### Output of the Analysis:
-- One **CSV file** per video containing the analysis results.
-- One **Excel file** per video containing the same data.
-- A **combined CSV/Excel file** aggregating results from all analysed videos.
+- One **CSV file** (spreadsheet data) per video, containing the analysis results. These are saved in the `raw data output files/CSV` folder. The main `raw data output files` folder path is defined in `code_scripts/config.py`.
+- One **Excel file** (spreadsheet data) per video, containing the same data. These are saved in the `raw data output files/Excel` folder.
+- A **combined CSV/Excel file** that aggregates results from all analysed videos, also saved in the respective subfolders within `raw data output files`.
 
 
 ### Run the Visualisation
@@ -180,8 +181,8 @@ This project analyses emotions in any videos using **DeepFace** and generates th
 	```
 
 #### Output of the Visualisation:
-- **Emotion distribution plot**: Visual representation of emotions surpassing a defined treshold in each frame across the entire video length.
-- **Animated timeline visualisation**: Dynamic timeline showing how emotions evolve throughout the analysed video.
+- **Emotion distribution plot**: A static image showing which emotions were detected above a set confidence level throughout each video. This is saved in the `data visualisation` folder.
+- **Animated timeline visualisation**: A video file showing how emotions change over time throughout the analysed video. This is also saved in the `data visualisation` folder.
 
 
 ### Additional Commands
@@ -193,7 +194,7 @@ This project analyses emotions in any videos using **DeepFace** and generates th
 
 ### Customization Options
 
-Most customizations can be done within the `config.py` file. The following are the most important variables to adjust:
+Most customizations can be done within the `code_scripts/config.py` file. This file acts as a central control panel for the project. The following are the most important variables to adjust:
 
 #### Thresholds
 - **`FACE_CONFIDENCE_THRESHOLD` (Default = 0.9)**:
@@ -227,9 +228,9 @@ Most customizations can be done within the `config.py` file. The following are t
   - Automatically detects the number of physical CPU cores on your system.
   - This value serves as the basis for parallel processing. Avoid modifying it unless necessary.
 
-- **`POOL_SIZE` (Default = `(CPU_CORES * 2) // 3`)**:
+- **`POOL_SIZE` (Default = `(CPU_CORES) // 4`)**:
   - Determines how many processes are executed simultaneously.
-  - A higher value speeds up processing but increases CPU load. Reduce this value if your system struggles with high resource usage.
+  - A higher value speeds up processing but increases CPU and RAM load. Reduce this value if your system struggles with high resource usage.
 
 - **`NUM_SEGMENTS` (Default = `POOL_SIZE * 2`)**:
   - Divides the animation into smaller segments for rendering.
@@ -260,9 +261,11 @@ Most customizations can be done within the `config.py` file. The following are t
 
 
 ## Troubleshooting
-- **FFmpeg Errors**: Ensure Microsoft Visual C++ Redistributable is installed.
-- **Missing Outputs**: Verify your threshold settings in `config.py`.
-- **Multiprocessing Failures**: Reduce `POOL_SIZE` in `config.py` to lower CPU load.
+- **FFmpeg Errors**: Ensure Microsoft Visual C++ Redistributable is installed (see Prerequisites).
+- **Missing Outputs**: 
+    - Check your threshold settings in `code_scripts/config.py` to ensure they are not too strict.
+    - Verify that the `raw data output files` and `data visualisation` folders are being created and that the program has permission to write files there.
+- **Multiprocessing Failures**: If the analysis crashes or your computer becomes very slow, try reducing the `POOL_SIZE` value in `code_scripts/config.py`. This will use fewer CPU resources.
 
 
 ## **What to Expect While the Code is Running**
@@ -297,3 +300,4 @@ This section describes the processes displayed in the Anaconda Prompt or termina
 #### **Execution Options**
 - If you run only the analysis (`python main.py analysis`), the process stops after step 7.
 - If you run only the visualisation (`python main.py visualisation --sheet sheet_name`), the process starts at step 9 and ends at step 15.
+````
