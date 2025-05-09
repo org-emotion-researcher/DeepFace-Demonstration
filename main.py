@@ -1,9 +1,20 @@
 import os
+import sys
 import argparse
 import warnings
-from analysis import run_analysis
-from visualisation import run_visualisation
-import config
+
+# Get the directory containing this script (main.py).
+# This is assumed to be the project root or a directory from which 'code_scripts' is a direct subdirectory.
+_MAIN_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Add this directory to sys.path to ensure 'code_scripts' module can be found.
+# This makes the script more robust if run from a different working directory.
+if _MAIN_SCRIPT_DIR not in sys.path:
+    sys.path.insert(0, _MAIN_SCRIPT_DIR)
+
+from code_scripts.analysis import run_analysis
+from code_scripts.visualisation import run_visualisation
+from code_scripts import config
 
 # Suppress Python deprecation warnings.
 warnings.filterwarnings("ignore", category=DeprecationWarning)
